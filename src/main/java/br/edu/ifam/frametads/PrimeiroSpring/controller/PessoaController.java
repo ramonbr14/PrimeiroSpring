@@ -1,5 +1,6 @@
 package br.edu.ifam.frametads.PrimeiroSpring.controller;
 
+import br.edu.ifam.frametads.PrimeiroSpring.dto.PessoaInputDTO;
 import br.edu.ifam.frametads.PrimeiroSpring.model.Pessoa;
 import br.edu.ifam.frametads.PrimeiroSpring.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,9 +50,9 @@ public class PessoaController {
     }
 
     //http://localhost:8081/api/pessoa/list
-    @PostMapping(value = "/api/pessoa/inserir", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/api/pessoa/inserir",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> create(@RequestBody PessoaInputDTO dto){
-            Pessoa pessoa=dto.build();
+            Pessoa pessoa=dto.build(cidadeRepository);
 
             pessoaRepository.save(pessoa);
 
